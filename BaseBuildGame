@@ -1,0 +1,1343 @@
+
+/**
+ * Write a description of class Hackathon here.
+ *
+ * @author Leo,Aoi,
+ * @version (a version number or a date)
+ */
+import java.util.Scanner; 
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.LockSupport;
+public class Hackathon
+{
+     public static void main(String[]args)
+    {
+        Scanner kb=new Scanner(System.in);
+        Random generator=new Random();
+        //Random number ints
+        int Tree;
+        int Hunt;
+        int Mine;
+        int Day;
+        int Attack;
+        
+        int Days=0;
+        int Win=0;
+        int HumansA=5;
+        int HumansD=0;
+        int HumansI=0;
+        int Food=15;
+        int Wood=5;
+        int Stone=5;
+        int DF=0;
+        int G=3;
+        int GIncr=0;
+        int HY=15;
+        int Challenge=0;
+        int Actions=0;
+        int FDIncr=0;
+        int M=4;
+        int Two=2;
+        int Three=3;
+        int Ten=10;
+        int Something=0;
+        int InfectionNum=1;
+        int HIncr=0;
+        int Part=0;
+        int Five=5;
+        
+        //enemy attack
+        int Bear=5;
+        int Brood=5;
+        int Eldrazi=30;
+        int Gisa=40;
+        int Millitia=20;
+        int Mycontyrant=M+=HumansD;
+        int Lumra=30;
+        int Skaab=HumansD*G;
+        int Chandra=25;
+        int Revelers=HumansA*Three;
+        int Phyrexia=InfectionNum*Ten;
+        
+        //combat int
+        int BearF=DF-Bear;
+        int BroodF=DF-Brood;
+        int EldraziF=DF-Eldrazi;
+        int GisaF=DF-Gisa;
+        int MillitiaF=DF-Millitia;
+        int MycontyrantF=DF-Mycontyrant;
+        int LumraF=DF-Lumra;
+        int SkaabF=DF-Skaab;
+        int ChandraF=DF-Chandra;
+        int RevelersF=DF-Revelers;
+        int PhyrexiaF=DF-Phyrexia;
+        
+        //Attacking Variables
+        int AD=0;
+        int Town1DF=20;
+        int Town2DF=23;
+        int Town3DF=27;
+        int Town4DF=25;
+        int PhyrexianDF=InfectionNum*Five;
+        int MillitaryTown=30;
+        int GisaHome=HumansD*Five;
+        
+        //attacking combat
+        int Town1F=Town1DF-AD;
+        int Town2F=Town2DF-AD;
+        int Town3F=Town3DF-AD;
+        int Town4F=Town4DF-AD;
+        int PhyrexianAF=PhyrexianDF-AD;
+        int MillitaryF=MillitaryTown-AD;
+        int GisaH=GisaHome-AD;
+        
+        //Heliod waves
+        int FoTroops=35;
+        int FWave=50;
+        int SunGiant=70;
+        int Purifiers=30;//makes them loose food
+        int Heliod=200;
+        
+        //Heliod combat
+        int FFight=DF-FoTroops;
+        int SFight=DF-FWave;
+        int TFight=DF-SunGiant;
+        int FoFight=DF-Purifiers;
+        int Boss=Heliod-=DF;
+        
+        
+        //Input strings
+        String Start;
+        String Begin;
+        String Action;
+        String Bushwag;
+        String Build;
+        String Geralf;
+        String Xenagos;
+        String Winner;
+        String Cow;
+        String Trader;
+        String Guild;
+        
+        //add random generator 
+        Tree=generator.nextInt(5)+1;
+        Hunt=generator.nextInt(5)+1;
+        Mine=generator.nextInt(5)+1;
+        Day=generator.nextInt(20)+1;
+        Attack=generator.nextInt(7)+1;
+        
+        System.out.println("Hello Player.");
+        System.out.println("If you want to learn the rules of this game write rules.");
+        System.out.println("You were on a ship, in space... not a big ship.");
+        System.out.println("Then...BOOOOOOOOMMM!!! you crashed on a world.");
+        System.out.println("There are mosters on this world.");
+        System.out.println("If you are ready to start this sick awesome game write start.");
+        Start=kb.nextLine();
+        while (!(Start.equalsIgnoreCase("start")))
+        {
+            if (Start.equalsIgnoreCase("rules"))
+            {
+                System.out.println("ok so every day you get three actions.");
+                System.out.println("if at the end of the day you dont have enought food for a human they die.");
+                System.out.println("at the start of the 3rd day a random thing will happen, humans will come to your settlement or something more devious.");
+                System.out.println("every building needs materials.");
+                System.out.println("when every you are attacked it is a battle between Defense and attack by the attakers if they win humans die if you win they die.");
+                System.out.println("if it is a tie you lose some humans and they die.");
+                System.out.println("To stop the game write Stop");
+                System.out.println("Any number inside a braket is to be writen as an action");
+            }
+            else 
+            {
+                System.out.println("Not an option");
+            }
+            Start=kb.nextLine();
+        }
+        System.out.println("Before we BEGIN could you please choose a guild to buff your playthrough for the rest of the game");
+        System.out.println("The choices are...");
+        System.out.println("Boros:Increases your attack by 5 (1)");
+        System.out.println("Golgari:The number of dead humans you have increase's your Defense by 1/2 (2)");
+        System.out.println("Orzhov:Every Death gives you 1 gold (3)");
+        System.out.println("Selensya:The Chapel makes 1 more Human every day (4)");
+        System.out.println("Gruul:Chopping wood gives yoou +1 wood (5)");
+        System.out.println("Azourius:+5 Defense (6)");
+        System.out.println("Simic:Every day get 1 human (7)");
+        Guild=kb.nextLine();
+        if (Guild.equals("1"))
+        {
+            System.out.println("Thank you for choosing Boros");
+            AD+=5;
+        }
+        else if (Guild.equals("2"))
+        {
+            System.out.println("Thank you for choosing Golgari");
+            
+        }
+        else if (Guild.equals("3"))
+        {
+            System.out.println("Thank you for choosing Orzhov");
+            
+        }
+        else if (Guild.equals("4"))
+        {
+            System.out.println("Thank you for choosing Selensya");
+        }
+        else if (Guild.equals("5"))
+        {
+            System.out.println("Thank you for choosing Gruul");
+        }
+        else if (Guild.equals("6"))
+        {
+            System.out.println("Thank you for choosing Azourius");
+            DF+=5;
+        }
+        else if (Guild.equals("7"))
+        {
+            System.out.println("Thank you for choosing Simic");
+            HIncr+=1;
+        }
+        Begin=kb.nextLine();
+        while (!(Begin.equalsIgnoreCase("Stop")))
+        {
+            Day=generator.nextInt(20)+1;
+            if (Days==15 && Actions==2)
+            {
+                System.out.println("    The Great Heliod Notices your growth in power and summons his demigods");
+                System.out.println("    Prepare for battle!");
+                waitsecs(2);
+            }
+            else if (Days>=16 && Days<=18 && Actions==2)
+            {
+                System.out.println("    The forward troops of heliods men attack your encampment");
+                System.out.println("    they ram against your walls.");
+                FFight=DF-FoTroops;
+                waitsecs(2);
+                if (FFight>0)
+                {
+                    System.out.println("    your troops repel the Warriors of the sun protecting your land.");
+                    waitsecs(2);
+                }
+                else if (FFight<0)
+                {
+                    System.out.println("    Your town is overtaken and many are killed.");
+                    System.out.println("    The troops also plunder your gold.");
+                    G-=10;
+                    HumansA-=4;
+                    HumansD+=4;
+                    waitsecs(2);
+                }
+                else if (FFight==0)
+                {
+                    System.out.println("    your troops repel the attack but many are burned in the flames");
+                    HumansA-=2;
+                    HumansD+=2;
+                    waitsecs(2);
+                }
+            }
+            else if (Days>=19 && Days<=21 && Actions==2)
+            {
+                System.out.println("    A army with estimated 100 troops marches on your town.");
+                SFight=DF-FWave;
+                waitsecs(2);
+                if (SFight>0)
+                {
+                    System.out.println("    your troops fend off the attack.");
+                    waitsecs(2);
+                }
+                else if (SFight<0)
+                {
+                    System.out.println("    the Army swarms your small town and kills many.");
+                    HumansA-=8;
+                    HumansD+=8;
+                    waitsecs(2);
+                }
+                else if (SFight==0)
+                {
+                    System.out.println("    The army begins to swarm your town but your people hide well and few are killed.");
+                    HumansA-=4;
+                    HumansD+=4;
+                    waitsecs(2);
+                }
+            }
+            else if (Days==22 && Actions==2)
+            {
+                System.out.println("    A giant souring over the clouds walks to your settlement and begins to crush your houses one by one.");
+                TFight=DF-SunGiant;
+                waitsecs(2);
+                if (TFight>0)
+                {
+                    System.out.println("    when you see the giant approaching a bald man in a yellow suit jumps straight at him one punching him to death.");
+                    waitsecs(2);
+                }
+                else if (TFight<0)
+                {
+                    System.out.println("    the giant crushes many of your builds and kills many.");
+                    HumansA-=6;
+                    HumansD+=6;
+                    waitsecs(2);
+                }
+                else if (TFight==0)
+                {
+                    System.out.println("    Before the bald man in a yellow suit gets here the giant is able to crush a few buildings.");
+                    HumansA-=3;
+                    HumansD+=3;
+                    waitsecs(2);
+                }
+            }
+            else if (Days>=23 && Days<=24 && Actions==2)
+            {
+                System.out.println("    occult memebers walk up to your wall and begin to preach.");
+                FoFight=DF-Purifiers;
+                waitsecs(2);
+                if (FoFight>0 ||FoFight<=0)
+                {
+                    System.out.println("    Your troops kill the people with little ease but then you hear one of your people run up to the walls");
+                    System.out.println("    Were running out of food, were running out of food.");
+                    Food-=30;
+                    waitsecs(2);
+                }
+            }
+            else if (Days>=25 && Actions==2 && Heliod>0)
+            {
+                System.out.println("    The sungrows and your day heat up, WOOD and FOOD is burned.");
+                Wood-=10;
+                Food-=10;
+                System.out.println("    Hours of pain bring many into madness, until Heliod finally comes to your town saying.");
+                System.out.println("    Hello tiny humans, you have grown against me and I will finally make you pay.");
+                waitsecs(2);
+                Boss=Heliod-=DF;
+                if (Boss>0)
+                {
+                    System.out.println("    MWHAHAHAHAHAHA, you petty humans!!!:)");
+                    System.out.println("    MWHAHAHAHAHAHA, you petty humans!!!:)");
+                    System.out.println("    MWHAHAHAHAHAHA, you petty humans!!!:)");
+                    System.out.println("    MWHAHAHAHAHAHA, you petty humans!!!:)");
+                    System.out.println("    MWHAHAHAHAHAHA, you petty humans!!!:)");
+                    System.out.println("    DIE!! DIE!!");
+                    HumansA-=10;
+                    HumansD+=10;
+                    waitsecs(2);
+                }
+                else if (Boss<0)
+                {
+                    System.out.println("    No How could you do this? Im imortal!!!");
+                    System.out.println("    How could I die??");
+                    System.out.println("    no");
+                    waitsecs(2);
+                    System.out.println("You Kill Heliod, The sun god");
+                }
+            }
+            if (Days>=5 && Actions==0)
+            //or everytime the day increases
+            {
+                if (Day==1)
+                {
+                    System.out.println("   A small group of human walks to your settlement and joins your group.");
+                    HumansA+=3;
+                    waitsecs(2);
+                }
+                else if (Day==2)
+                {
+                    System.out.println("   A large group of humans walk to your settlement and joins your group.");
+                    HumansA+=6;
+                    waitsecs(2);
+                }
+                else if (Day==3)
+                {
+                    System.out.println("   on the horizon you see a towering colossuss walking towards your settlement.");
+                    System.out.println("   when reaching your settlement you identify them to be Eldrazi.");
+                    System.out.println("   Your settlement stands no chance against them just their arrival kills 2 humans.");
+                    System.out.println(DF-Eldrazi);
+                    HumansA-=2;
+                    HumansD+=2;
+                    EldraziF=DF-Eldrazi;
+                    if (EldraziF>0)
+                    {
+                        System.out.println("     You barely manage to fend of the invading Eldrazi.");
+                        waitsecs(2);
+                    }
+                    else if (EldraziF<0)
+                    {
+                        System.out.println("     The Eldrazi Hoard runs over you killing many in its wake.");
+                        HumansA-=7;
+                        HumansD+=7;
+                        waitsecs(2);
+                        if (Guild.equals("3"))
+                        {
+                        G+=7;
+                        }
+                    }
+                    else if (EldraziF==0)
+                    {
+                        System.out.println("     The eldrazi rush over you but due to evacuation the loses are minimal.");
+                        HumansA-=3;
+                        HumansD+=3;
+                        waitsecs(2);
+                        if (Guild.equals("3"))
+                        {
+                        G+=3;
+                        }
+                    }
+                }
+                else if (Day==4)
+                {
+                    System.out.println("   A small group of people arrive at your settlement with food");
+                    HumansA+=3;
+                    Food+=5;
+                    waitsecs(2);
+                }
+                else if (Day==5)
+                {
+                    System.out.println("   A small Millitia approaches your small camp and lays seige.");
+                    Food-=5;
+                    System.out.println(DF-Millitia);
+                    MillitiaF=DF-Millitia;
+                    if (MillitiaF>0)
+                    {
+                        System.out.println("     Using superior strategy you fend of the seige.");
+                        waitsecs(2);
+                    }
+                    else if (MillitiaF<0)
+                    {
+                        System.out.println("     The Seige starves you out killing many.");
+                        HumansA-=4;
+                        HumansD+=4;
+                        Food-=5;
+                        waitsecs(2);
+                        if (Guild.equals("3"))
+                        {
+                        G+=4;
+                        }
+                    }
+                    else if (MillitiaF==0)
+                    {
+                        System.out.println("     you break the seige but not before some loses.");
+                        HumansA-=2;
+                        HumansD+=2;
+                        waitsecs(2);
+                        if (Guild.equals("3"))
+                        {
+                        G+=2;
+                        }
+                    }
+                }
+                else if (Day==6)
+                {
+                    System.out.println("   the mycontyrant and his hoard attacks your settlement sending the spores of the fungi to your dead boosting his numbers.");
+                    System.out.println(DF-Mycontyrant);
+                    MycontyrantF=DF-Mycontyrant;
+                    if (MycontyrantF>0)
+                    {
+                        System.out.println("     Your guards fend off the hoard from your walls.");
+                        waitsecs(2);
+                    }
+                    else if(MycontyrantF<0)
+                    {
+                        System.out.println("     The fungi hoard swmms the city killing many.");
+                        HumansA-=4;
+                        HumansD+=4;
+                        waitsecs(2);
+                        if (Guild.equals("3"))
+                        {
+                        G+=4;
+                        }
+                    }
+                    else if (Mycontyrant==0)
+                    {
+                        System.out.println("     The hoard take many but not without killing many.");
+                        HumansA-=2;
+                        HumansD-=2;
+                        waitsecs(2);
+                        if (Guild.equals("3"))
+                        {
+                        G+=2;
+                        }
+                    }
+                }
+                else if (Day==7)
+                {
+                    System.out.println("   Lumra a bear the size of a building charges towards your settlement brings life with him.");
+                    Food+=10;
+                    System.out.println(DF-Lumra);
+                    LumraF=DF-Lumra;
+                    if (LumraF>0)
+                    {
+                        System.out.println("    you fend off the bear and and drive Lumra back into the wilds.");
+                        waitsecs(2);
+                    }
+                    else if(LumraF<0)
+                    {
+                        System.out.println("    the bear drives into your walls killing many slaugthering the towns.");
+                        HumansA-=6;
+                        HumansD+=6;
+                        waitsecs(2);
+                        if (Guild.equals("3"))
+                        {
+                        G+=6;
+                        }
+                    }
+                    else if (LumraF==0)
+                    {
+                        System.out.println("    The bear kills many but your troops manage to send it into the wilds.");
+                        HumansA-=3;
+                        HumansD+=3;
+                        waitsecs(2);
+                        if (Guild.equals("3"))
+                        {
+                        G+=6;
+                        }
+                    }
+                }
+                else if (Day==8)
+                {
+                    System.out.println("   a small group of humans join your settlement.");
+                    HumansA+=3;
+                    waitsecs(2);
+                }
+                else if (Day==9)
+                {
+                    System.out.println("  A surgeon calling himself Geralf walks to your walls and asks to heal your wounded.");
+                    System.out.println("   Take him in (1)");
+                    System.out.println("   Say no (2)");
+                    Geralf=kb.nextLine();
+                    SkaabF=DF-Skaab;
+                    if (Geralf.equals("1"))
+                    {
+                        System.out.println("  he goes to your graveyard ands turns them into Skaabs attacking your city.");
+                        System.out.println(DF-Skaab);
+                        if (SkaabF>0)
+                        {
+                            System.out.println("    the skaabs disrupt the infastructure from the inside but the guards are able to fend them off.");
+                            waitsecs(2);
+                        }
+                        else if (SkaabF<0)
+                        {
+                            System.out.println("    the Skaabs were to much and they overwhelm the defenses.");
+                            HumansA-=5;
+                            HumansD+=5;
+                            waitsecs(2);
+                            if (Guild.equals("3"))
+                            {
+                            G+=5;
+                            }
+                        }
+                        else if (SkaabF==0)
+                        {
+                            System.out.println("    the skaabs were a threat but you manage to fend them");
+                            HumansA-=2;
+                            HumansD+=2;
+                            waitsecs(2);
+                            if (Guild.equals("3"))
+                            {
+                            G+=2;
+                        }
+                        }
+                    }
+                    else if (Geralf.equals("2"))
+                    {
+                        System.out.println("  He leaves.");
+                        waitsecs(2);
+                    }
+                }
+                else if(Day==10)
+                {
+                    System.out.println("  In a blazing fury a human engulfed in flames and madness attacks you village and burning your wood.");
+                    Wood-=5;
+                    System.out.println(DF-Chandra);
+                    ChandraF=DF-Chandra;
+                    if (ChandraF>0)
+                    {
+                        System.out.println("    Chandra the blazing ball of fury was barely fended off");
+                        waitsecs(2);
+                    }
+                    else if (ChandraF<0)
+                    {
+                        System.out.println("    Chandra burns her way through your settlement destroying much.");
+                        HumansA-=4;
+                        HumansD+=4;
+                        waitsecs(2);
+                        if (Guild.equals("3"))
+                        {
+                        G+=4;
+                        }
+                    }
+                    else if (ChandraF==0)
+                    {
+                        System.out.println("    The burn from Chandra does much but your troops manage to deflect her assault.");
+                        HumansA-=2;
+                        HumansD+=2;
+                        waitsecs(2);
+                        if (Guild.equals("3"))
+                        {
+                        G+=2;
+                        }
+                    }
+                }
+                else if(Day==11)
+                {
+                    System.out.println("  One of your humans stub his toes and dies from an infection.");
+                    HumansA--;
+                    HumansD++;
+                    waitsecs(2);
+                    G++;
+                }
+                else if (Day==12)
+                {
+                    System.out.println("  One of people when stumbling around during the night finds a box with food stone and wood in it.");
+                    Food+=3;
+                    Wood+=3;
+                    Stone+=3;
+                    waitsecs(2);
+                }
+                else if (Day==13)
+                {
+                    System.out.println("  Xenagos a satyr god walks into your city giving your town a choice either");
+                    System.out.println("   Lose 2 people and get 5 of each rescource (1)");
+                    System.out.println("   or get 5 people but fight his revelers (2)");
+                    Xenagos=kb.nextLine();
+                    if (Xenagos.equals("1"))
+                    {
+                        System.out.println("    His revelers rush the city grabbing 2 people and leaving the rescources.");
+                        HumansA-=2;
+                        Wood+=5;
+                        Food+=5;
+                        Stone+=5;
+                        waitsecs(2);
+                    }
+                    else if (Xenagos.equals("2"))
+                    {
+                        System.out.println("   The 5 people wander into your city looking confused and astray before a swarm of revelers attack you city.");
+                        HumansA+=5;
+                        System.out.println(DF-Revelers);
+                        RevelersF=DF-Revelers;
+                        if (RevelersF>0)
+                        {
+                            System.out.println("    in the chaos your defenses manage to form a defensive barrier and push out the revelers.");
+                            waitsecs(2);
+                        }
+                        else if (Revelers<0)
+                        {
+                            System.out.println("    the revelers overtake your city causing destrution at everyturn.");
+                            HumansA-=4;
+                            HumansD+=4;
+                            waitsecs(2);
+                            if (Guild.equals("3"))
+                            {
+                            G+=4;
+                            }
+                        }
+                        else if (RevelersF==0)
+                        {
+                            System.out.println("    the reverlers attack doing much damage but before any more could be done the gaurds organize themselves and counterattack.");
+                            HumansA-=2;
+                            HumansD+=2;
+                            waitsecs(2);
+                            if (Guild.equals("3"))
+                            {
+                            G+=2;
+                            }
+                        }
+                    }
+                }
+                else if (Day==14)
+                {
+                    System.out.println("  the phyrexians come, they infect and they destroy...");
+                    InfectionNum*=Two;
+                    System.out.println(DF-Phyrexia);
+                    System.out.println("  They will return, they will...infect");
+                    PhyrexiaF=DF-Phyrexia;
+                    if (PhyrexiaF>0)
+                    {
+                        System.out.println("    you manage to fend off the invading hoard.");
+                        waitsecs(2);
+                    }
+                    else if(PhyrexiaF<0)
+                    {
+                        System.out.println("    the hoard invades and worlds fall.");
+                        HumansA-=6;
+                        HumansD+=6;
+                        waitsecs(2);
+                        if (Guild.equals("3"))
+                        {
+                        G+=6;
+                        }
+                    }
+                    else if (PhyrexiaF==0)
+                    {
+                        System.out.println("    you walls hold but the pressence of phyrexia kills.");
+                        HumansA-=3;
+                        HumansD+=3;
+                        waitsecs(2);
+                        if (Guild.equals("3"))
+                        {
+                        G+=3;
+                        }
+                    }
+                }
+                else if (Day==15)
+                {
+                    System.out.println("  A humbling ghost shambles towards your settlement, placing fear in your settlement.");
+                    HY-=5;
+                    waitsecs(2);
+                }
+                else if (Day==16)
+                {
+                    System.out.println("  A large group of humans come with a large ammount of food.");
+                    HumansA+=7;
+                    Food+=10;
+                    waitsecs(2);
+                }
+                else if (Day==17)
+                {
+                    System.out.println("  when all your villagers wake up in the wreck of your ship you find a base box, when placed gives you 10 DF.");
+                    DF+=10;
+                    waitsecs(2);
+                }
+                else if (Day==18)
+                {
+                    System.out.println("  for some reason this day you all slept good so all the villagers are happy.");
+                    HY+=8;
+                    waitsecs(2);
+                }
+                else if (Day==19)
+                {
+                    System.out.println("  A cow wandered into your village, what do you do with it.");
+                    System.out.println("   Kill it (1)");
+                    System.out.println("   Save it (2)");
+                    Cow=kb.nextLine();
+                    if (Cow.equals("1"))
+                    {
+                        System.out.println("  the cow's blood splatters over the ground, giving you much beef.");
+                        Food+=10;
+                        waitsecs(2);
+                    }
+                    else if (Cow.equals("2"))
+                    {
+                        System.out.println("  the cow wanders across town every day giving you milk.");
+                        FDIncr++;
+                        waitsecs(2);
+                    }
+                }
+                else if (Day==20)
+                {
+                    System.out.println("  a small group of humans join your village with wood.");
+                    HumansA+=3;
+                    Wood+=5;
+                    waitsecs(2);
+                }
+            }
+            System.out.println(" ");
+            System.out.println("Days Alive " +Days);
+            System.out.println("Humans Alive " +HumansA);
+            System.out.println("Food " +Food);
+            System.out.println("Wood " +Wood);
+            System.out.println("Stone " +Stone);
+            System.out.println("Gold " +G);
+            System.out.println("Happiness " +HY);
+            System.out.println("Defense " +DF);
+            System.out.println("Attack " +AD);
+            System.out.println(" ");
+            System.out.println(" ");
+            System.out.println("ACTIONS");
+            System.out.println("    Chop Trees (1)");
+            System.out.println("    Go hunting (2)");
+            System.out.println("    Mine (3)");
+            System.out.println("    Build a building (4)");
+            System.out.println("    Trade with trader (5)");
+            System.out.println("    Attack to enemy (6)");
+            Action=kb.nextLine();
+            if (Action.equals("1"))
+            {
+                Tree=generator.nextInt(5)+1;
+                if (Tree==1)
+                {
+                    System.out.println("    You gain 5 WOOD");
+                    Wood+=5;
+                    waitsecs(1);
+                    if (Guild.equals("5"))
+                    {
+                        Wood++;
+                    }
+                }
+                else if (Tree==2)
+                {
+                    System.out.println("    you gain 7 WOOD");
+                    Wood+=7;
+                    waitsecs(1);
+                    if (Guild.equals("5"))
+                    {
+                        Wood++;
+                    }
+                }
+                else if (Tree==3)
+                {
+                    System.out.println("    you gain 10 WOOD");
+                    Wood+=10;
+                    waitsecs(1);
+                    if (Guild.equals("5"))
+                    {
+                        Wood++;
+                    }
+                }
+                else if (Tree==4)
+                {
+                    System.out.println("    you gain 3 WOOD");
+                    Wood+=3;
+                    waitsecs(1);
+                    if (Guild.equals("5"))
+                    {
+                        Wood++;
+                    }
+                }
+                else if (Tree==5)
+                {
+                    System.out.println("    you encounter a Bear...");
+                    System.out.println(DF-Bear);
+                    BearF=DF-Bear;
+                    waitsecs(1);
+                    if (BearF>0)
+                    {
+                        System.out.println("     you kill the attacking bear and continue with your tasks.");
+                        waitsecs(1);
+                    }
+                    else if (BearF<0)
+                    {
+                        System.out.println("     the bear's attack was not percepted by the workers killing 1");
+                        HumansA-=1;
+                        HumansD++;
+                        waitsecs(1);
+                        if (Guild.equals("3"))
+                        {
+                        G++;
+                        }
+                    }
+                    else if (BearF==0)
+                    {
+                        System.out.println("     you manage to fend off the bear with minimal loses.");
+                        waitsecs(1);
+                    }
+                }
+            }
+            else if (Action.equals("2"))
+            {
+                Hunt=generator.nextInt(5)+1;
+                if (Hunt==1)
+                {
+                    System.out.println("    you gain 6 FOOD");
+                    Food+=5;
+                    waitsecs(1);
+                }
+                else if (Hunt==2)
+                {
+                    System.out.println("    you gain 7 FOOD");
+                    Food+=6;
+                    waitsecs(1);
+                }
+                else if (Hunt==3)
+                {
+                    System.out.println("    you gain 5 FOOD");
+                    Food+=4;
+                    waitsecs(1);
+                }
+                else if (Hunt==4)
+                {
+                    System.out.println("    you encounter a bushwag");
+                    waitsecs(1);
+                    System.out.println("   Pet it (1)");
+                    System.out.println("   Kill it (2)");
+                    System.out.println("   RUN (3)");
+                    Bushwag=kb.nextLine();
+                    
+                    if (Bushwag.equals("1"))
+                    {
+                        System.out.println("The branches of a bushwag spike and prickle you but it is content.");
+                        System.out.println("you gain 5 WOOD");
+                        Wood+=5;
+                        waitsecs(1);
+                    }
+                    else if(Bushwag.equals("2"))
+                    {
+                        System.out.println("You aim your arrow and fire but the shot bounces off it and the bushwag kills one of your people.");
+                        HumansA--;
+                        HumansD++;
+                        waitsecs(1);
+                    }
+                    else if (Bushwag.equals("3"))
+                    {
+                        System.out.println("You run from the mighty beast leaving your honor along with it.");
+                        waitsecs(1);
+                    }
+                }
+                else if (Hunt==5)
+                {
+                    System.out.println("Your human runs into a satyr in the wood who calls himself xenagos.");
+                    System.out.println("Xenagos convinces yout human to join the endless party... the human leaves");
+                    HumansA--;
+                    waitsecs(1);
+                }
+            }
+            else if(Action.equals("3"))
+            {
+                Mine=generator.nextInt(5)+1;
+                if (Mine==1)
+                {
+                    System.out.println("    you get 5 STONE");
+                    Stone+=5;
+                    waitsecs(1);
+                }
+                else if (Mine==2)
+                {
+                    System.out.println("    you get 7 STONE");
+                    Stone+=7;
+                    waitsecs(1);
+                }
+                else if (Mine==3)
+                {
+                    System.out.println("    you get 4 STONE");
+                    Stone+=4;
+                    waitsecs(1);
+                }
+                else if (Mine==4)
+                {
+                    System.out.println("    you get 10 STONE");
+                    Stone+=10;
+                    waitsecs(1);
+                }
+                else if (Mine==5)
+                {
+                    System.out.println("    you encounter a Broodrage Mycanoid");
+                    System.out.println(DF-Brood); 
+                    waitsecs(1);
+                    BroodF=DF-Brood;
+                    if (BroodF>0)
+                    {
+                        System.out.println("     your workers fend off the sudden attack.");
+                        waitsecs(1);
+                    }
+                    else if (BroodF<0)
+                    {
+                        System.out.println("     The sudden attack kills 2 of your worker and strengthens the Mycontyrant...");
+                        HumansA-=2;
+                        HumansD+=2;
+                        Mycontyrant+=2;
+                        waitsecs(1);
+                        if (Guild.equals("3"))
+                        {
+                        G+=2;
+                        }
+                    }
+                    else if (BroodF==0)
+                    {
+                        System.out.println("     The attack caught your workers by surprise but they quickly fended him off.");
+                        HumansA-=1;
+                        HumansD+=1;
+                        Mycontyrant++;
+                        waitsecs(1);
+                        if (Guild.equals("3"))
+                        {
+                        G+=1;
+                        }
+                    }
+                }
+            }
+            else if (Action.equals("4"))
+            {
+                System.out.println(" ");
+                System.out.println("    Barracks (Increases Defense),(5 Wood 8 Stone)  (1)");
+                System.out.println("    House (Increases Happiness),(4 Wood 1 Stone)  (2)");
+                System.out.println("    Tower (Increase Defense),(4 Wood 4 Stones)  (3)");
+                System.out.println("    Resturant (Increase Food),(5 wood 6 Stone)  (4)");
+                System.out.println("    Chapel (Makes Humans),(10 Wood 4 Stone)  (5)");
+                System.out.println("    Pyramid (Gets gold),(2 Wood 12 Stone)  (6)");
+                System.out.println("    Farm (Increase Food),(6 Wood 2 Stone)  (7)");
+                System.out.println("    Forge (Increases Attack) (4 Wood 10 Stone)  (8)");
+                Build=kb.nextLine();
+                if (Build.equals("1")&& Wood>=5 && Stone>=8)
+                {
+                    System.out.println("the humans get busy, working on you magnificint project");
+                    DF+=8;
+                    Wood-=5;
+                    Stone-=8;
+                    waitsecs(1);
+                }
+                else if (Build.equals("2")&&Wood>=4 && Stone>=1)
+                {
+                    System.out.println("the humans get busy, working on you magnificint project");
+                    HY+=5;
+                    Wood-=4;
+                    Stone-=1;
+                    waitsecs(1);
+                    HumansA+=1;
+                }
+                else if (Build.equals("3") && Wood>=4 && Stone>=4)
+                {
+                    System.out.println("the humans get busy, working on you magnificint project");
+                    DF+=5;
+                    Wood-=4;
+                    Stone-=4;
+                    waitsecs(1);
+                }
+                else if (Build.equals("4") && Wood>=5 && Stone>=6)
+                {
+                    System.out.println("the humans get busy, working on you magnificint project");
+                    FDIncr+=2;
+                    Wood-=5;
+                    Stone-=6;
+                    waitsecs(1);
+                }
+                else if (Build.equals("5") && Wood>=10 && Stone>=4)
+                {
+                    System.out.println("the humans get busy, working on you magnificint project");
+                    Wood-=10;
+                    Stone-=4;
+                    HIncr+=1;
+                    waitsecs(1);
+                    if (Guild.equals("4"))
+                    {
+                        HIncr+=1;
+                    }
+                }
+                else if (Build.equals("6") && Wood>=2 && Stone>=12)
+                {
+                    System.out.println("the humans get busy, working on you magnificint project");
+                    G+=10;
+                    GIncr+=3;
+                    Wood-=2;
+                    Stone-=12;
+                    waitsecs(1);
+                }
+                else if (Build.equals("7") && Wood>=6 && Stone>=2)
+                {
+                    System.out.println("the humans get busy, working on you magnificint project");
+                    FDIncr+=1;
+                    Wood-=6;
+                    Stone-=2;
+                    waitsecs(1);
+                }
+                else if (Build.equals("8") && Wood>=4 && Stone>=10)
+                {
+                    System.out.println("the humans get busy, working on you magnificint project");
+                    AD+=5;
+                    Wood-=4;
+                    Stone-=10;
+                }
+                else
+                {
+                    System.out.println("you people get busy building something but you dont know what...");
+                    waitsecs(1);
+                    Something++;
+                }
+            }
+            else if(Action.equals("5"))
+            {
+                System.out.println("the trader notices you walking towards his cart and he smiles a big grin...:)");
+                System.out.println("Hello, it is me Urza otherwise known as the T.R.A.D.E.R.");
+                System.out.println("What would you like to buy from my humble store.");
+                System.out.println("     5 Wood: 15 Gold  (1)");
+                System.out.println("     5 Stone: 15 Gold  (2)");
+                System.out.println("     5 Food: 20 Gold  (3)");
+                System.out.println("     3 Wood,3 Stone,3 Food: 30 Gold  (4)");
+                System.out.println("     1 Weapon: 40 Gold +10 AD (5)");
+                System.out.println("     1 Ballistic Missile Part: 100 Gold  (6)");
+                Trader=kb.nextLine();
+                if (Trader.equals("1") && G>=15)
+                {
+                    System.out.println("Thank you for your purchase:)");
+                    Wood+=5;
+                    G-=15;
+                    waitsecs(1);
+                }
+                else if (Trader.equals("2") && G>=15)
+                {
+                    System.out.println("Thank you for your purchase:)");
+                    Stone+=5;
+                    G-=15;
+                    waitsecs(1);
+                }
+                else if (Trader.equals("3") && G>=20)
+                {
+                    System.out.println("Thank you for your purchase:)");
+                    Food+=5;
+                    G-=20;
+                    waitsecs(1);
+                }
+                else if (Trader.equals("4") && G>=30)
+                {
+                    System.out.println("Thank you for your purchase:)");
+                    Wood+=3;
+                    Stone+=3;
+                    Food+=3;
+                    G-=30;
+                    waitsecs(1);
+                }
+                else if (Trader.equals("5") && G>=25)
+                {
+                    System.out.println("Thank you for your purchase:)");
+                    AD+=10;
+                    G-=25;
+                    waitsecs(1);
+                }
+                else if (Trader.equals("5") && G>=60)
+                {
+                    System.out.println("Good luck with you little project...");
+                    Part++;
+                    G-=60;
+                    waitsecs(1);
+                }
+            }
+            else if(Action.equals("6"))
+            {
+                System.out.println("You attack to other towns...");
+                if (Attack==1)
+                {
+                    System.out.println("your forces encroach on a neighboring town");
+                    System.out.println(Town1F);
+                    Town1F=Town1DF-AD;
+                    if (Town1F>0)
+                    {
+                        System.out.println("The town had better defenses than expected and kill 3 of your troops.");
+                        HumansA-=3;
+                    }
+                    else if (Town1F<0)
+                    {
+                        System.out.println("your army encroaches and decimates the neighboring town getting you 10 WOOD and 7 FOOD.");
+                        Wood+=10;
+                        Food+=7;
+                    }
+                    else
+                    {
+                        System.out.println("your army was defleced by the walls zero loses.");
+                    }
+                }
+                else if (Attack==2)
+                {
+                    System.out.println("your forces encroach on a neighboring town");
+                    System.out.println(Town2F);
+                    Town2F=Town2DF-AD;
+                    if (Town2F>0)
+                    {
+                        System.out.println("The town had better defenses than expected and kill 4 of your troops.");
+                        HumansA-=4;
+                    }
+                    else if (Town2F<0)
+                    {
+                        System.out.println("your army encroaches and decimates the neighboring town getting you 7 WOOD and 10 STONE.");
+                        Wood+=7;
+                        Stone+=10;
+                    }
+                    else 
+                    {
+                        System.out.println("your army was defleced by the walls zero loses.");
+                    }
+                }
+                else if (Attack==3)
+                {
+                    System.out.println("your forces encroach on a neighboring town");
+                    System.out.println(Town3F);
+                    Town3F=Town3DF-AD;
+                    if (Town3F>0)
+                    {
+                        System.out.println("The town had better defenses than expected and kill 2 of your troops.");
+                        HumansA-=2;
+                    }
+                    else if (Town3F<0)
+                    {
+                        System.out.println("Your army encroaches and ecimates the neighboring town getting 3 human slaves and 5 WOOD.");
+                        Wood+=5;
+                        HumansA+=3;
+                    }
+                    else
+                    {
+                        System.out.println("your army was defleced by the walls zero loses.");
+                    }
+                }
+                else if (Attack==4)
+                {
+                    System.out.println("your forces encroach on a neighboring town");
+                    System.out.println(Town4F);
+                    Town4F=Town4DF-AD;
+                    if (Town4F>0)
+                    {
+                        System.out.println("The town had better defenses than expected and kill 5 of your troops.");
+                        HumansA-=5;
+                    }
+                    else if (Town4F<0)
+                    {
+                        System.out.println("Your army encroaches and ecimates the neighboring town getting 5 Stone and 12 Food.");
+                        Stone+=5;
+                        Food+=12;
+                    }
+                    else 
+                    {
+                        System.out.println("your army was defleced by the walls zero loses.");
+                    }
+                }
+                else if (Attack==5)
+                {
+                    System.out.println("Your Troops find a Phyrexian Stringhold pulsating with a mechanical sickness with it.");
+                    System.out.println(PhyrexianAF);
+                    PhyrexianAF=PhyrexianDF-AD;
+                    InfectionNum+=2;
+                    if (PhyrexianAF>0)
+                    {
+                        System.out.println("your troops struggkle agianst phyrexia and eventually fall.");
+                        HumansA-=6;
+                    }
+                    else if (PhyrexianAF<0)
+                    {
+                        System.out.println("your troops destroy the stronghold of ohyrexia taking only the WOOD and STONE");
+                        Wood+=7;
+                        Stone+=7;
+                    }
+                    else
+                    {
+                        System.out.println("your troops attempt to destroy the stronghold, you lose many.");
+                        HumansA-=10;
+                    }
+                }
+                else if (Attack==6)
+                {
+                    System.out.println("Yoour troops find a town that seems to have a more millitary focus.");
+                    System.out.println(MillitaryF);
+                    MillitaryF=MillitaryTown-AD;
+                    if (MillitaryF>0)
+                    {
+                        System.out.println("the Town has better defenses than you thought and you loose many troops.");
+                        HumansA-=6;
+                    }
+                    else if (MillitaryF<0)
+                    {
+                        System.out.println("Your troops take the stronghold and get 10 FOOD and 4 Humans");
+                        HumansA+=4;
+                        Food+=10;
+                    }
+                    else
+                    {
+                        System.out.println("You troops never attacked the town.");
+                    }
+                }
+                else if (Attack==7)
+                {
+                    System.out.println("your troops stumble apon a house in a glade surronded by graveyards.");
+                    System.out.println(GisaH);
+                    GisaH=GisaHome-AD;
+                    if (GisaH>0)
+                    {
+                        System.out.println("one of your troops tentavivly walsk to the door and after a single knock the graves spew out zombie killing every last troop sent on the mission.");
+                        HumansA-=15;
+                    }
+                    else if (GisaH<0)
+                    {
+                        System.out.println("one of your troops tentavivly walsk to the door and after a single knock the graves spew out zombies but your troops fend them off and retreat back to camp but with the zombies on your tail.");
+                        HumansD+=15;
+                    }
+                    else
+                    {
+                        System.out.println("your troops walk away before they get in troble.");
+                    }
+                }
+            }
+            Actions++;
+            if (HY<=0)
+            {
+                System.out.println("You Lose:(");
+                System.exit(0);
+            }
+            if (HumansA<=0)
+            {
+                System.out.println("You Lose:(");
+                System.exit(0);
+            }
+            if (Food<0)
+            {
+                System.out.println("You Lose:(");
+                System.exit(0);
+            }
+            if (HumansD>=10)
+            {
+                System.out.println("Gisa arrives, and the zombies follow.");
+                System.out.println(DF-Gisa);
+                HumansD-=5;
+                GisaF=DF-Gisa;
+                waitsecs(1);
+                HY-=2;
+                if (GisaF>0)
+                {
+                    System.out.println("     You manage to defend against the zombie hoard.");
+                    waitsecs(1);
+                }
+                else if (GisaF<0)
+                {
+                    System.out.println("     the zombies steamroll your encampment leaving death in their wake.");
+                    HumansA-=4;
+                    waitsecs(1);
+                }
+                else if (GisaF==0)
+                {
+                    System.out.println("     your encampment loses many lives to the hoard but your soliders manage stop most of the deaths.");
+                    HumansA-=2;
+                    waitsecs(1);
+                }
+            }
+            if (Days==30)
+            {
+                System.out.println("You win.");
+                System.out.println("Continue (1)");
+                System.out.println("Stop (2)");
+                Winner=kb.nextLine();
+                if (Winner.equals("1"))
+                {
+                    System.out.println("Enjoy.");
+                }
+                else if (Winner.equals("2"))
+                {
+                    System.exit(0);
+                }
+                else
+                {
+                    System.out.println("Guess you just wanna continue.");
+                }
+            }
+            if (HY<=0)
+            {
+                System.out.println("You Lose:(");
+                System.exit(0);
+            }
+            if (HumansA<=0)
+            {
+                System.out.println("You Lose:(");
+                System.exit(0);
+            }
+            if (Food<0)
+            {
+                System.out.println("You Lose:(");
+                System.exit(0);
+            }
+            if (Actions>=3)
+            {
+                Days++;
+                Actions-=3;
+                Food+=FDIncr;
+                Food-=HumansA;
+                HumansA+=HIncr;
+                G+=GIncr;
+                if (Guild.equals("2"))
+                {
+                    DF+=HumansD;
+                }
+            }
+            if (Part==3)
+            {
+                System.out.println("the Great weapon Has been made, prepare for WAR!!!!!!!!");
+                AD+=100;
+                DF+=100;
+            }
+        }
+    }
+    static void waitsecs(int target) {
+        LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(target));
+    }
+    static void waitnanosecs(int target) {
+        LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(target));
+    }
+}
